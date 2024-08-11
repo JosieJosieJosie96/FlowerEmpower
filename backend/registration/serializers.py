@@ -85,7 +85,7 @@ class PasswordResetSerializer(serializers.Serializer):
         send_mail(
             'Password reset for Flower Empower',
             'Here is your reset code: {}'.format(user.registration_profile.code),
-            'flower.empower.management@gmail.com',
+            '${{ secrets.EMAIL_ADDRESS }}',
             ['{}'.format(email)],
             fail_silently=False, )
 
