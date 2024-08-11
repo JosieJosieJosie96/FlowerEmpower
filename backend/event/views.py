@@ -211,7 +211,7 @@ class SendBouquetMakersEmailView(APIView):
             return Response({'error': 'No bouquet makers found for this event.'}, status=status.HTTP_404_NOT_FOUND)
 
         messages = [
-            (subject, body, 'flower.empower.management@gmail.com', [recipient])
+            (subject, body, '${{ secrets.EMAIL_ADDRESS }}', [recipient])
             for recipient in recipients
         ]
         send_mass_mail(messages)
@@ -358,7 +358,7 @@ class SendDriversEmailView(APIView):
                 'See you Saturday for Deliveries! 🌸 – Your driving route',
                 message=plain_message,
                 # 'Here is your route for tomorrow:\n\n{}'.format(routes_list[number_of_driver]),
-                from_email='flower.empower.management@gmail.com',
+                from_email='${{ secrets.EMAIL_ADDRESS }}',
                 recipient_list=[
                     '{}'.format(list(User.objects.filter(id__in=event.drivers.all()))[number_of_driver].email)],
                 html_message=convert_to_html_content,
