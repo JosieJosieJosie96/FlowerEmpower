@@ -29,7 +29,8 @@ class RegistrationView(GenericAPIView):
         send_mail(
             'Welcome to Flower Empower',
             'Here is your registration code: {}'.format(code),
-            'flower.empower.management@gmail.com',
+           ${{ secrets.EMAIL_ADDRESS }}
+,
             ['{}'.format(request.data.get('email'))],
             fail_silently=False, )
         serializer.save(code=code)
